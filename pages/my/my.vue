@@ -1,6 +1,6 @@
 <template>
-	<view class="content">
-		shoye
+	<view>
+		wode
 	</view>
 </template>
 
@@ -8,18 +8,15 @@
 	export default {
 		data() {
 			return {
-				title: '首页'
+				
 			}
 		},
-		onLoad() {
-
-		},
 		methods: {
-
+			
 		}
 	}
 </script>
 
 <style>
-	
+
 </style>
