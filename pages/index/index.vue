@@ -1,6 +1,9 @@
 <template>
 	<view class="content">
 		shoye
+		<view class="iconfont icon-add">
+			
+		</view>
 	</view>
 </template>
 
