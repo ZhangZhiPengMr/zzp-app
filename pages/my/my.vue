@@ -8,13 +8,13 @@
 		<view class="dl-bg">
 			<!-- 个人资料组件 -->
 			<myPersonal></myPersonal>
-			<view class="my-list">
+			<view class="my-list p-3">
 				<!-- 我的列表组件 -->
 				<myList :lists="lists"></myList>
 			</view>
 		</view>
 		<!-- 优惠卷设置问题组件 -->
-		<view class="mt-5">
+		<view class="mt-5 p-3">
 			<i-list :list="list"></i-list>
 		</view>
 	</view>
@@ -36,12 +36,11 @@
 			myPersonal,
 			myList
 		},
+		computed: {},
 		methods: {
 
 		},
-		onLoad() {
-			console.log(this.lists);
-		}
+		onLoad() {}
 	}
 </script>
 
@@ -67,22 +66,6 @@
 		width: 100%;
 		height: 300rpx;
 		background-color: #40c470;
-		border-radius: 0 0 40rpx 40rpx;
-		position: relative;
-
-		.my-list {
-			position: absolute;
-			bottom: -75rpx;
-			left: 30rpx;
-			width:690rpx;
-			background-color: #fff;
-			height: 150rpx;
-			border-radius: 10rpx;
-			box-shadow: 0px 0px 10rpx #dedede;
-		}
-	}
-
-	.mt-5 {
-		margin-top: 120rpx;
+		border-radius: 0 0 55rpx 55rpx;
 	}
 </style>

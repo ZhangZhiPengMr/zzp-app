@@ -1,17 +1,21 @@
 import App from './App'
+import Vue from 'vue'
 //引入mixin混入
 import mixin from "@/common/mixin.js"
 Vue.mixin(mixin)
 
+// 引入util
+import * as util from "@/common/utli.js"
+Vue.prototype.$util = util
+
 // 引入vuex
 import store from "@/store/index.js"
 
-
 // #ifndef VUE3
-import Vue from 'vue'
 Vue.config.productionTip = false
 App.mpType = 'app'
 const app = new Vue({
+	store,
 	...App
 })
 app.$mount()

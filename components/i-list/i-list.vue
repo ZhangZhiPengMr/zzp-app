@@ -1,14 +1,15 @@
 <template>
-	<view class="list-box m-4">
-		<view v-for="(item,index) in list" :key="index" class="list flex p-2 justify-between" @click="tiaoZhaun(item)">
+	<view class="uni-list uni-border-top-bottom">
+		<view v-for="(item,index) in list" :key="index" class="list flex justify-between pt-1 pb-2"
+			@click="tiaoZhaun(item)">
 			<view>
 				<text v-if="item.icon" :class="item.icon"></text>
-				<text class="title">{{item.title}}</text>
+				<text class="title ml-2 font-sm">{{item.title}}</text>
 			</view>
 			<view>
 				<text v-if="item.text">{{item.text}}</text>
 				<image v-if="item.src" :src="item.src" mode=""></image>
-				<text v-if="item.rightIcon" :class="item.rightIcon"></text>
+				<text v-if="item.rightIcon" :class="item.rightIcon" style="font-size: 32rpx;"></text>
 				<switch v-if="item.checked || item.checked === false" :checked="item.checked" />
 			</view>
 		</view>
@@ -20,25 +21,7 @@
 		props: {
 			list: {
 				type: Array,
-				default: () => ([{
-						title: "我的优惠卷",
-						page: "/pages/my/my-coupon",
-						rightIcon: 'iconfont icon-tijiao',
-						login: false
-					},
-					{
-						title: "常见问题",
-						page: "/pages/my/my-problem",
-						rightIcon: 'iconfont icon-right',
-						login: false
-					},
-					{
-						title: "设置",
-						page: "/pages/my/my-setup",
-						rightIcon: 'iconfont icon-right',
-						login: false
-					}
-				])
+				default: () => ([])
 			}
 		},
 		data() {
@@ -60,13 +43,30 @@
 </script>
 
 <style lang="scss">
-	.list-box {
+	view {
+		box-sizing: border-box;
+	}
+
+	.page {
 		background-color: #fafafa;
+
 		.list {
+			width: 100%;
 			background-color: #fff;
 			margin-bottom: 30rpx;
-			border-bottom: 1px solid #efefef;
+			border-bottom: 1px solid #f4f4f4;
 			color: #3e4244;
 		}
+
+		.list:last-child {
+			border-bottom: none;
+		}
+	}
+
+	.icon-9:before,
+	.icon-help:before,
+	.icon-set:before {
+		font-size: 40rpx;
+		color: #1d78dc;
 	}
 </style>

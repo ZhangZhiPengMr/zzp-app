@@ -26,8 +26,18 @@
 		},
 		{
 			"path": "pages/auth/login",
+			"style": { 
+				"app-plus": {
+					"titleNView": false
+				}
+			}
+		},
+		{
+			"path": "pages/bind-phone/bind-phone",
 			"style": {
-				"navigationBarTitleText": "登录"
+				"app-plus": {
+					"titleNView": false
+				}
 			}
 		},
 		{
@@ -40,12 +50,6 @@
 			"path": "pages/my/my-coupon",
 			"style": {
 				"navigationBarTitleText": "我的优惠卷"
-			}
-		},
-		{
-			"path": "pages/my/my-learning",
-			"style": {
-				"navigationBarTitleText": "在学"
 			}
 		},
 		{
@@ -69,7 +73,7 @@
 		{
 			"path": "pages/my/my-setup",
 			"style": {
-				"navigationBarTitleText": "设置"
+				"navigationBarTitleText": "我的设置"
 			}
 		}
 	],

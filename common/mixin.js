@@ -7,18 +7,34 @@ export default {
 	methods: {
 		//跳转路由
 		navTo(url, options = {}) {
-
+			// 没传路由的情况
 			if (!url) return
-			if (options.login) {
+			// 判断传过来的状态是不是需要登录能进才能进的
+			if (options.login && !this.$store.getters.loginState) {
 				uni.navigateTo({
 					url: '/pages/auth/login'
 				})
 				return
 			}
+			// 登录后判断有没有绑定手机号
+			if (options.login && this.$store.getters.loginState) {
+				uni.navigateTo({
+					url: '/pages/bind-phone/bind-phone'
+				})
+				return
+			}
+			// 跳转路由
 			uni.navigateTo({
 				url
 			})
 		},
+		//跳转到tabber页面
+		navTab(url) {
+			uni.switchTab({
+				url
+			})
+		},
+
 
 		// 页面后退
 		navBack(delta = 1) {

@@ -1,8 +1,9 @@
 <template>
-	<view class="flex justify-between mt-3">
-		<view v-for="(item,index) in lists" :key="index" class="w-100 text-center" @click="tiaoZuan(item)">
-			<view class="iconfont icon-OrderHistory font-lg"></view>
-			<view class="mt-1">{{item.title}}</view>
+	<view class="flex bg-white shadow rounded">
+		<view v-for="(item,index) in lists" :key="index"
+			class="flex-1 flex flex-column align-center justify-center py-3" @click="tiaoZuan(item)">
+			<view :class="item.icon" class="font-lg" style="font-size: 20px; color: rgb(254, 189, 0);"></view>
+			<view class="font-sm mt-1 text-secondary">{{item.title}}</view>
 		</view>
 	</view>
 </template>
@@ -12,27 +13,7 @@
 		props: {
 			lists: {
 				type: Array,
-				default: () => [{
-						title: "订单",
-						page: "/pages/my/my-order",
-						login: false
-					},
-					{
-						title: "消息",
-						page: "/pages/my/my-news",
-						login: false
-					},
-					{
-						title: "收藏",
-						page: "/pages/my/my-collect",
-						login: false
-					},
-					{
-						title: "在学",
-						page: "/pages/my/my-learning",
-						login: false
-					}
-				]
+				default: () => []
 			}
 		},
 		data() {
@@ -42,7 +23,11 @@
 		},
 		methods: {
 			//根据点击不同的跳转不同路由
-			tiaoZuan(item){
+			tiaoZuan(item) {
+				if (item.page === "/pages/learn/learn") {
+					this.navTab("/pages/my/my")
+					return
+				}
 				if (item.page) {
 					this.navTo(item.page, {
 						login: item.login
