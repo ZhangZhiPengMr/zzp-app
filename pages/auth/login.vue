@@ -108,14 +108,18 @@
 				try {
 					const response = await userApi.login(this.loginInfo)
 					uni.hideLoading()
-					this.$util.msg("登录成功")
-					this.$store.commit('setToken', response)
-					// 判断是否有手机号
-					let userInfo = this.$store.state.userInfo
-					if (userInfo.phone) {
-						this.navTo("/pages/bind-phone/bind-phone")
+					if (response instanceof Object) {
+						this.$util.msg("登录成功")
+						this.$store.commit('setToken', response)
+						// 判断是否有手机号
+						let userInfo = this.$store.state.userInfo
+						if (userInfo.phone) {
+							this.navTo("/pages/bind-phone/bind-phone")
+						} else {
+							this.back()
+						}
 					} else {
-						this.back()
+						this.$util.msg(response)
 					}
 				} catch (e) {
 					console.log(e);

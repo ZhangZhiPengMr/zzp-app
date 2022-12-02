@@ -4,13 +4,15 @@
 			@click="tiaoZhaun(item)">
 			<view>
 				<text v-if="item.icon" :class="item.icon"></text>
-				<text class="title ml-2" style="font-size: 28rpx;">{{item.title}}</text>
+				<text class="title ml-2" style="font-size: 28rpx;font-weight: 400;">{{item.title}}</text>
 			</view>
 			<view>
 				<text v-if="item.text">{{item.text}}</text>
 				<image v-if="item.src" :src="item.src" mode=""></image>
 				<text v-if="item.rightIcon" :class="item.rightIcon" style="font-size: 32rpx;"></text>
 				<switch v-if="item.checked || item.checked === false" :checked="item.checked" />
+				<input v-if="item.input" type="text" :placeholder="item.input" v-model="value[item.model]"
+					class="text-right pr-2">
 			</view>
 		</view>
 	</view>
@@ -22,6 +24,10 @@
 			list: {
 				type: Array,
 				default: () => ([])
+			},
+			value: {
+				type: Object,
+				defauIt: () => ({})
 			}
 		},
 		data() {

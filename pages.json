@@ -89,6 +89,12 @@
 					"titleNView": false
 				}
 			}
+		},
+		{
+			"path": "pages/auth/user-safe",
+			"style": {
+				"navigationBarTitleText": "修改密码"
+			}
 		}
 	],
 	"globalStyle": {

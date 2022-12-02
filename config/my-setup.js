@@ -2,7 +2,8 @@ export default () => {
 	return [{
 			title: "账户安全",
 			rightIcon: 'iconfont icon-jinru',
-			login: true
+			login: true,
+			page: "/pages/auth/user-safe"
 		},
 		{
 			title: "清除缓存",

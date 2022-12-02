@@ -52,11 +52,21 @@ const forget = (data) => {
 		data
 	})
 }
+
+// 修改密码 /mobile/update_password
+const updatePassword = (data) => {
+	return request({
+		url: '/mobile/update_password',
+		method: "post",
+		data
+	})
+}
 export default {
 	login,
 	getCode,
 	logout,
 	register,
 	bindPhone,
-	forget
+	forget,
+	updatePassword
 }
