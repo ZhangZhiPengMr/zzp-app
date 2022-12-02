@@ -1,6 +1,6 @@
 <template>
 	<view class="p-1">
-		<i-list :list="list"></i-list>
+		<i-list :list="list" @clearStorage="clearStorage"></i-list>
 		<i-button :btnTitle="btnTitle" @clickButton="clickButton" v-if="loginState"></i-button>
 	</view>
 </template>
@@ -23,15 +23,38 @@
 		},
 		methods: {
 			//退出登录
-			async clickButton() {
+			clickButton() {
 				try {
-					const response = await userApi.logout()
-					this.$util.msg(response)
-					this.$store.commit("logout")
+					// 提示
+					uni.showModal({
+						content: '是否要退出登录？',
+						success: async (res) => {
+							if (res.confirm) {
+								const response = await userApi.logout()
+								this.$util.msg(response)
+								this.$store.commit("logout")
+							}
+						},
+					});
 				} catch (e) {
 					console.log(e);
 					//TODO handle the exception
 				}
+			},
+			// 清楚数据
+			clearStorage(obj) {
+				// 提示
+				uni.showModal({
+					// title: '是否清楚缓存?',
+					content: '是否清楚缓存？',
+					success: (res) => {
+						if (res.confirm) {
+							uni.clearStorage()
+							this.$set(obj, 'text', '0KB')
+							this.$util.msg('清除成功')
+						}
+					},
+				});
 			}
 		}
 	}

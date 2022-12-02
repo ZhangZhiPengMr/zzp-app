@@ -43,6 +43,11 @@
 					})
 					return
 				}
+				// 事件
+				if (item.event) {
+					this.$emit(item.event, item)
+					return
+				}
 			}
 		}
 	}

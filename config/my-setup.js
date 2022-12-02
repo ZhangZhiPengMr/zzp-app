@@ -8,7 +8,8 @@ export default () => {
 		{
 			title: "清除缓存",
 			text: "2.00kb",
-			login: false
+			login: false,
+			event: "clearStorage"
 		},
 		{
 			title: "检查更新",
