@@ -110,7 +110,13 @@
 					uni.hideLoading()
 					this.$util.msg("登录成功")
 					this.$store.commit('setToken', response)
-					this.navTo("/pages/bind-phone/bind-phone")
+					// 判断是否有手机号
+					let userInfo = this.$store.state.userInfo
+					if (userInfo.phone) {
+						this.navTo("/pages/bind-phone/bind-phone")
+					} else {
+						this.back()
+					}
 				} catch (e) {
 					console.log(e);
 					uni.hideLoading()

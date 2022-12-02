@@ -26,7 +26,7 @@
 		},
 		{
 			"path": "pages/auth/login",
-			"style": { 
+			"style": {
 				"app-plus": {
 					"titleNView": false
 				}
@@ -74,6 +74,12 @@
 			"path": "pages/my/my-setup",
 			"style": {
 				"navigationBarTitleText": "我的设置"
+			}
+		},
+		{
+			"path": "pages/user-info/user-info",
+			"style": {
+				"navigationBarTitleText": "编辑资料"
 			}
 		}
 	],

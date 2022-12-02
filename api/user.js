@@ -48,5 +48,6 @@ export default {
 	login,
 	getCode,
 	logout,
-	register
+	register,
+	bindPhone
 }

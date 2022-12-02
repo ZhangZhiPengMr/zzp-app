@@ -47,8 +47,14 @@
 				this.navTab("/pages/my/my")
 			},
 			// 绑定手机号
-			clickButton() {
-				alert('绑定手机号')
+			async clickButton() {
+				try {
+					const response = await userApi.bindPhone(this.bindPhone)
+					console.log(response);
+				} catch (e) {
+					//TODO handle the exception
+					console.log(e);
+				}
 			},
 			// 发送验证码按钮
 			async handleSend() {
@@ -56,7 +62,11 @@
 					const response = await userApi.getCode({
 						phone: this.bindPhone.phone
 					})
-					console.log(response);
+					if (response == "ok") {
+						console.log(response);
+					} else {
+						this.$util.msg(response)
+					}
 				} catch (e) {
 					//TODO handle the exception
 					console.log(e);

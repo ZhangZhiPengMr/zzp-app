@@ -36,7 +36,11 @@
 				let userInfo = this.$store.state.userInfo
 				if (!userInfo.phone) {
 					this.navTo("/pages/bind-phone/bind-phone")
+					return
 				}
+
+				// 有token和手机号的情况下跳转到个人资料页面
+				this.navTo("/pages/user-info/user-info")
 			}
 		}
 	}
