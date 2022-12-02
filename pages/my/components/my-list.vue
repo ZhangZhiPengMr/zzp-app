@@ -25,7 +25,7 @@
 			//根据点击不同的跳转不同路由
 			tiaoZuan(item) {
 				if (item.page === "/pages/learn/learn") {
-					this.navTab("/pages/my/my")
+					this.navTab("/pages/learn/learn")
 					return
 				}
 				if (item.page) {

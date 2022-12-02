@@ -6,8 +6,7 @@
 				<view class="h3">
 					绑定手机号
 				</view>
-				<i-form :btnTitle="btnTitle" v-model="bindPhone" @clickButton="clickButton" :fromList="fromList"
-					@handleSend="handleSend">
+				<i-form :btnTitle="btnTitle" v-model="bindPhone" @clickButton="clickButton" :fromList="fromList">
 				</i-form>
 			</view>
 		</view>

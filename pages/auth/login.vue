@@ -13,7 +13,7 @@
 					<view class="text-success font-sm" @click="register">
 						{{ state ? "注册账号" : "去登陆" }}
 					</view>
-					<view class="text-hover-light font-sm">
+					<view class="text-hover-light font-sm" @click="handleForget">
 						忘记密码？
 					</view>
 				</view>
@@ -141,6 +141,10 @@
 					console.log(e);
 					uni.hideLoading()
 				}
+			},
+			// 忘记密码
+			handleForget() {
+				this.navTo("/pages/auth/forget")
 			}
 		}
 	}

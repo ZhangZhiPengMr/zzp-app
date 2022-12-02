@@ -44,10 +44,19 @@ const bindPhone = (data) => {
 	})
 }
 
+// 找回密码 /mobile/forget
+const forget = (data) => {
+	return request({
+		url: '/mobile/forget',
+		method: "post",
+		data
+	})
+}
 export default {
 	login,
 	getCode,
 	logout,
 	register,
-	bindPhone
+	bindPhone,
+	forget
 }
