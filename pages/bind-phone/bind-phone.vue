@@ -6,7 +6,9 @@
 				<view class="h3">
 					绑定手机号
 				</view>
-				<i-form :btnTitle="btnTitle" @clickButton="clickButton"></i-form>
+				<i-form :btnTitle="btnTitle" v-model="bindPhone" @clickButton="clickButton" :fromList="fromList"
+					@handleSend="handleSend">
+				</i-form>
 			</view>
 		</view>
 	</view>
@@ -17,7 +19,26 @@
 	export default {
 		data() {
 			return {
-				btnTitle: '绑定'
+				btnTitle: '绑定',
+				bindPhone: {
+					// 手机号
+					phone: "18739240231",
+					// 验证码
+					code: "",
+				},
+				// form组件需要的
+				fromList: [{
+						placeholder: "请输入手机号",
+						loginInfo: "phone",
+						icon: "iconfont icon-wode"
+					},
+					{
+						placeholder: "验证码",
+						loginInfo: "code",
+						icon: "iconfont icon-gouwu",
+						button: true
+					}
+				]
 			}
 		},
 		methods: {
@@ -28,6 +49,18 @@
 			// 绑定手机号
 			clickButton() {
 				alert('绑定手机号')
+			},
+			// 发送验证码按钮
+			async handleSend() {
+				try {
+					const response = await userApi.getCode({
+						phone: this.bindPhone.phone
+					})
+					console.log(response);
+				} catch (e) {
+					//TODO handle the exception
+					console.log(e);
+				}
 			}
 		}
 	}

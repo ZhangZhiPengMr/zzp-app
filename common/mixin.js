@@ -16,8 +16,8 @@ export default {
 				})
 				return
 			}
-			// 登录后判断有没有绑定手机号
-			if (options.login && this.$store.getters.loginState) {
+			let userInfo = this.$store.state.userInfo
+			if (options.login && !this.$store.getters.hasLogin && !userInfo.phone) {
 				uni.navigateTo({
 					url: '/pages/bind-phone/bind-phone'
 				})

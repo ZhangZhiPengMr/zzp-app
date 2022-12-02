@@ -4,14 +4,14 @@
 		<view class="content">
 			<view class="con">
 				<view class="h3">
-					登录
+					{{ state ? "登录" : "注册" }}
 				</view>
 				<!-- 表单组件 -->
 				<i-form @clickButton="clickButton" v-model="loginInfo" :fromList="fromList" :btnTitle="btnTitle">
 				</i-form>
 				<view class="flex justify-between mt-4">
-					<view class="text-success font-sm">
-						注册账号
+					<view class="text-success font-sm" @click="register">
+						{{ state ? "注册账号" : "去登陆" }}
 					</view>
 					<view class="text-hover-light font-sm">
 						忘记密码？
@@ -40,18 +40,21 @@
 				loginInfo: {
 					username: "zzpadmin", //账号
 					password: "062037", //密码
+					repassword: "" //确认密码
 				},
 				checked: false,
+				state: true,
 				btnTitle: '登  录',
 				// form组件需要的
 				fromList: [{
 						placeholder: "请输入用户名",
-						loginInfo: "username"
+						loginInfo: "username",
+						icon: "iconfont icon-wode"
 					},
 					{
 						placeholder: "请输入密码",
 						loginInfo: "password",
-						password: true
+						icon: "iconfont icon-gouwu"
 					}
 				]
 			}
@@ -65,33 +68,73 @@
 			hanbleCange() {
 				this.checked = !this.checked
 			},
+			// 注册和登陆切换
+			register() {
+				this.state = !this.state
+				this.btnTitle = this.state ? "登录" : "注册"
+				// 如果是注册就添加一条input在后面
+				if (!this.state) {
+					this.fromList.push({
+						placeholder: "请输入确认密码",
+						loginInfo: "repassword",
+						icon: "iconfont icon-gouwu"
+					})
+				} else {
+					this.fromList.pop()
+				}
+			},
 			//登录
-			async clickButton() {
+			clickButton() {
 				//判断是否勾选请先阅读并同意用户协议&隐私声明
 				if (this.checked) {
 					// 提示登录中
 					uni.showLoading({
-						title: '登录中',
+						title: this.state ? "登陆中" : "注册中",
 						mask: true
 					})
 					//调取登录的接口
-					try {
-						const response = await userApi.login(this.loginInfo)
-						this.loginSuccess(response)
-						uni.hideLoading()
-					} catch (e) {
-						console.log(e);
-						uni.hideLoading()
+					if (this.state) {
+						this.loginSuccess()
+					} else {
+						// 调取注册成功接口
+						this.registerSuccess()
 					}
 				} else {
 					this.$util.msg("请先阅读并同意用户协议&隐私声明")
 				}
 			},
 			//登录成功是调用
-			loginSuccess(data) {
-				this.$util.msg("登录成功")
-				this.$store.commit('setToken', data)
-				this.navTo("/pages/bind-phone/bind-phone")
+			async loginSuccess() {
+				try {
+					const response = await userApi.login(this.loginInfo)
+					uni.hideLoading()
+					this.$util.msg("登录成功")
+					this.$store.commit('setToken', response)
+					this.navTo("/pages/bind-phone/bind-phone")
+				} catch (e) {
+					console.log(e);
+					uni.hideLoading()
+				}
+			},
+			//注册成功是调用
+			async registerSuccess() {
+				try {
+					const response = await userApi.register(this.loginInfo)
+					uni.hideLoading()
+					if (response.username) {
+						this.$util.msg("注册成功")
+						this.register()
+						// 成功后清空表单
+						this.loginInfo.username = ""
+						this.loginInfo.password = ""
+						this.loginInfo.repassword = ""
+					} else {
+						this.$util.msg(response)
+					}
+				} catch (e) {
+					console.log(e);
+					uni.hideLoading()
+				}
 			}
 		}
 	}

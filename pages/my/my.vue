@@ -3,7 +3,7 @@
 		<!-- 头部导航 -->
 		<view class="my-top">
 			<text>我的</text>
-			<text>···</text>
+			<text @click="jump" style="font-size: 30px;">···</text>
 		</view>
 		<view class="dl-bg">
 			<!-- 个人资料组件 -->
@@ -38,7 +38,9 @@
 		},
 		computed: {},
 		methods: {
-
+			jump() {
+				this.navTo("/pages/my/my-setup")
+			}
 		},
 		onLoad() {}
 	}

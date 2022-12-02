@@ -1,10 +1,10 @@
 <template>
 	<view class="uni-list uni-border-top-bottom">
-		<view v-for="(item,index) in list" :key="index" class="list flex justify-between pt-1 pb-2"
+		<view v-for="(item,index) in list" :key="index" class="list flex justify-between pt-2 pb-2"
 			@click="tiaoZhaun(item)">
 			<view>
 				<text v-if="item.icon" :class="item.icon"></text>
-				<text class="title ml-2 font-sm">{{item.title}}</text>
+				<text class="title ml-2" style="font-size: 28rpx;">{{item.title}}</text>
 			</view>
 			<view>
 				<text v-if="item.text">{{item.text}}</text>

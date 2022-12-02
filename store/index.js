@@ -11,27 +11,36 @@ const store = new Vuex.Store({
 	state: {
 		// 用户登录之后token
 		userToken: uni.getStorageSync(TOKEN_KEY) || "",
-		// 用户名称
-		userName: uni.getStorageSync(USER_NAME_KEY) || ""
+		// 用户信息
+		userInfo: uni.getStorageSync(USER_NAME_KEY) || ""
 	},
 	getters: {
 		// 登录的状态
 		loginState(state) {
 			return !!state.userToken
-		},
-		// 用户名称
-		userName(state) {
-			return state.userName
 		}
 	},
 	mutations: {
+		//登录成功存储token
 		setToken(state, data) {
 			if (data.token) {
 				uni.setStorageSync(TOKEN_KEY, data.token)
 			}
-			if (data.username) {
-				uni.setStorageSync(USER_NAME_KEY, data.username)
+			if (data) {
+				let obj = {
+					username: data.username,
+					phone: data.phone
+				}
+				uni.setStorageSync(USER_NAME_KEY, obj)
 			}
+		},
+		// 退出登录
+		logout(state) {
+			// 清空用户信息&用户token和本地
+			state.userInfo = ""
+			state.userToken = ""
+			uni.removeStorageSync(USER_NAME_KEY)
+			uni.removeStorageSync(TOKEN_KEY)
 		}
 	},
 	actions: {

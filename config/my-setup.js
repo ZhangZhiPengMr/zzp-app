@@ -6,7 +6,7 @@ export default () => {
 		},
 		{
 			title: "清除缓存",
-			text: "1kb",
+			text: "2.00kb",
 			login: false
 		},
 		{
