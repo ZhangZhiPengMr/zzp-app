@@ -17,8 +17,8 @@
 						忘记密码？
 					</view>
 				</view>
-				<view class="uni-icons wx">
-					wx
+				<view class="mt-5 wx">
+					<image src="../../static/微信.png" mode="" class="mask m-auto"></image>
 				</view>
 				<view class="text-center text-muted mt-4">
 					<checkbox-group @change="hanbleCange">
@@ -54,7 +54,7 @@
 					{
 						placeholder: "请输入密码",
 						loginInfo: "password",
-						icon: "iconfont icon-gouwu"
+						icon: "iconfont icon-suoding_huaban"
 					}
 				]
 			}
@@ -77,7 +77,7 @@
 					this.fromList.push({
 						placeholder: "请输入确认密码",
 						loginInfo: "repassword",
-						icon: "iconfont icon-gouwu"
+						icon: "iconfont icon-suoding_huaban"
 					})
 				} else {
 					this.fromList.pop()
@@ -184,9 +184,13 @@
 		height: 100rpx;
 		border-radius: 50%;
 		border: #5ccc84 1px solid;
-		margin-top: 60rpx;
 		margin-left: 42%;
-		text-align: center;
-		line-height: 100rpx;
+		position: relative;
+
+		image {
+			width: 50%;
+			height: 50%;
+			position: absolute;
+		}
 	}
 </style>

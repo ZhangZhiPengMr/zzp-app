@@ -1,15 +1,17 @@
 <template>
 	<form class="login-form">
-		<view v-for="(item,index) in fromList" :key="index" class="flex mt-5">
+		<view v-for="(item,index) in fromList" :key="index" class="flex mt-5 position-relative">
 			<text :class="item.icon" class="icon"></text>
 			<input :placeholder="item.placeholder" :password="item.password" v-model="value[item.loginInfo]">
-			<button v-if="item.button" class="send" @click="handleSend">发送</button>
+			<button v-if="item.button" class="send"
+				@click="handleSend">{{codeDuration ? codeDuration + 's' : '发送'}}</button>
 		</view>
 		<i-button :btnTitle="btnTitle" @clickButton="clickButton"></i-button>
 	</form>
 </template>
 
 <script>
+	import userApi from "@/api/user.js"
 	export default {
 		props: {
 			// v-model 绑定的值
@@ -27,7 +29,8 @@
 		},
 		data() {
 			return {
-
+				codeDuration: null,
+				interval: null,
 			}
 		},
 		methods: {
@@ -36,8 +39,30 @@
 				this.$emit("clickButton")
 			},
 			// 发送验证码按钮
-			handleSend() {
-				this.$emit("handleSend")
+			async handleSend() {
+				try {
+					const response = await userApi.getCode({
+						phone: this.value.phone
+					})
+					this.$util.msg(response);
+					console.log(response);
+					this.codeDuration = 60
+					this.interval = setInterval(() => {
+						this.codeDuration--
+						// 如果倒计时为0 
+						if (this.codeDuration <= 0) {
+							// 并且定时器是开启的状态
+							if (this.interval) {
+								// 清楚定时器
+								clearInterval(this.interval)
+								this.interval = null
+							}
+						}
+					}, 1000)
+				} catch (e) {
+					//TODO handle the exception
+					console.log(e);
+				}
 			}
 		}
 	}
@@ -56,14 +81,14 @@
 		color: rgb(51, 51, 51);
 		font-size: 16px;
 		background-color: #f5f5f5;
-		width: 100rpx;
+		width: 100rpx !important;
 		height: 100rpx;
 		line-height: 100rpx;
 		text-align: center;
 	}
 
 	.send {
-		width: 300rpx;
+		width: 200rpx;
 		height: 100rpx;
 		line-height: 100rpx;
 		font-size: 28rpx;
@@ -71,5 +96,7 @@
 		border-radius: none;
 		color: #fff;
 		border-radius: 0 8rpx 8rpx 0;
+		position: absolute;
+		right: 0;
 	}
 </style>

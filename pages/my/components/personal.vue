@@ -2,12 +2,13 @@
 	<view>
 		<view class="page" @click="tiaoZuan">
 			<view class="img">
-				<image src="../../../static/logo.png" mode=""></image>
+				<image :src="userInfo.avatar" mode=""></image>
 			</view>
 			<view class="text ml-3 flex-1">
 				<view class="text-white font-md" v-if="!userInfo">立即登录</view>
-				<view class="text-white font-md" v-if="userInfo">{{userInfo.username}}</view>
-				<view class="text-white font-sm mt-0">登录解锁更多功能</view>
+				<view class="text-white font-md" v-if="userInfo">{{userInfo.nickname}}</view>
+				<view class="text-white font-sm mt-0" v-if="!userInfo">登录解锁更多功能</view>
+				<view class="text-white font-sm mt-0" v-if="userInfo">暂无描述</view>
 			</view>
 			<text class="iconfont icon-ico code mt-5" style="color: #fff;" v-if="userInfo"></text>
 		</view>

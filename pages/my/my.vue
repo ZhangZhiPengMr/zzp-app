@@ -7,7 +7,7 @@
 		</view>
 		<view class="dl-bg">
 			<!-- 个人资料组件 -->
-			<myPersonal></myPersonal>
+			<myPersonal :userInfo="userInfo"></myPersonal>
 			<view class="my-list p-3">
 				<!-- 我的列表组件 -->
 				<myList :lists="lists"></myList>
@@ -25,12 +25,18 @@
 	import myList from "./components/my-list.vue"
 	import lists from "@/config/my-list.js"
 	import list from "@/config/i-list.js"
+	import {
+		mapState
+	} from "vuex"
 	export default {
 		data() {
 			return {
 				lists: lists(),
 				list: list()
 			}
+		},
+		computed: {
+			...mapState(["userInfo"])
 		},
 		components: {
 			myPersonal,

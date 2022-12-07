@@ -7,8 +7,7 @@
 					找回密码
 				</view>
 				<!-- 表单组件 -->
-				<i-form @clickButton="clickButton" v-model="loginInfo" :fromList="fromList" :btnTitle="btnTitle"
-					@handleSend="handleSend">
+				<i-form @clickButton="clickButton" v-model="loginInfo" :fromList="fromList" :btnTitle="btnTitle">
 				</i-form>
 			</view>
 		</view>
@@ -35,16 +34,16 @@
 				}, {
 					placeholder: "验证码",
 					loginInfo: "code",
-					icon: "iconfont icon-gouwu",
+					icon: "iconfont icon-suoding_huaban",
 					button: true
 				}, {
 					placeholder: "请输入新密码",
 					loginInfo: "password",
-					icon: "iconfont icon-gouwu"
+					icon: "iconfont icon-suoding_huaban"
 				}, {
 					placeholder: "请输入确认新密码",
 					loginInfo: "repassword",
-					icon: "iconfont icon-gouwu"
+					icon: "iconfont icon-suoding_huaban"
 				}]
 			}
 		},
@@ -76,18 +75,6 @@
 					console.log(e);
 				}
 			},
-			// 发送验证码按钮
-			async handleSend() {
-				try {
-					const response = await userApi.getCode({
-						phone: this.loginInfo.phone
-					})
-					this.$util.msg(response)
-				} catch (e) {
-					//TODO handle the exception
-					console.log(e);
-				}
-			}
 		}
 	}
 </script>

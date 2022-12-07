@@ -334,6 +334,9 @@
   border-top-style: solid;
   border-top-color: #dee2e6;
 }
+.border-top-14{
+  border-top: solid 14rpx #eeeeee;
+}
 .border-right {
   border-right-width: 1rpx;
   border-right-style: solid;

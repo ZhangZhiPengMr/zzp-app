@@ -1,4 +1,5 @@
 import request from "@/api/request.js"
+import upload from "@/api/upload.js"
 
 //用户登录接口
 const login = (data) => {
@@ -61,6 +62,24 @@ const updatePassword = (data) => {
 		data
 	})
 }
+
+// 编辑个人资料接口
+const update = (data) => {
+	return request({
+		url: "/mobile/update_info",
+		method: "post",
+		data
+	})
+}
+
+// 上传图像
+const uploadImg = (file) => {
+	return upload({
+		url: '/mobile/upload',
+		method: "post",
+		file
+	})
+}
 export default {
 	login,
 	getCode,
@@ -68,5 +87,7 @@ export default {
 	register,
 	bindPhone,
 	forget,
-	updatePassword
+	updatePassword,
+	update,
+	uploadImg
 }

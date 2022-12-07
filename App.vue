@@ -19,7 +19,9 @@
 	/* 引入动画库 */
 	@import url("common/animate.min.css");
 	/* 引入字体图标 */
-	@import url("common/iconfont.css");
+	@import url("/common/iconfont.css");
+	/* 引入额外添加的图标库 */
+	@import url("/static/font/iconfont.css");
 	/* 引入主题样式表 */
 	@import url("common/common.css");
 </style>

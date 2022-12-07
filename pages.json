@@ -3,7 +3,10 @@
 		{
 			"path": "pages/index/index",
 			"style": {
-				"navigationBarTitleText": "首页"
+				"enablePullDownRefresh": true,
+				"app-plus": {
+					"titleNView": false
+				}
 			}
 		},
 		{
@@ -95,6 +98,15 @@
 			"style": {
 				"navigationBarTitleText": "修改密码"
 			}
+		}, {
+			"path": "pages/search/search",
+			"style": {
+				"enablePullDownRefresh": true,
+				"app-plus": {
+					"titleNView": false
+				}
+			}
+
 		}
 	],
 	"globalStyle": {

@@ -34,7 +34,7 @@
 					{
 						placeholder: "验证码",
 						loginInfo: "code",
-						icon: "iconfont icon-gouwu",
+						icon: "iconfont icon-suoding_huaban",
 						button: true
 					}
 				]
@@ -43,7 +43,7 @@
 		methods: {
 			// 返回我的页面
 			back() {
-				this.navTab("/pages/my/my")
+				this.navBack()
 			},
 			// 绑定手机号
 			async clickButton() {
@@ -55,22 +55,6 @@
 					console.log(e);
 				}
 			},
-			// 发送验证码按钮
-			async handleSend() {
-				try {
-					const response = await userApi.getCode({
-						phone: this.bindPhone.phone
-					})
-					if (response == "ok") {
-						console.log(response);
-					} else {
-						this.$util.msg(response)
-					}
-				} catch (e) {
-					//TODO handle the exception
-					console.log(e);
-				}
-			}
 		}
 	}
 </script>

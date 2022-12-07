@@ -8,7 +8,7 @@
 			</view>
 			<view>
 				<text v-if="item.text">{{item.text}}</text>
-				<image v-if="item.src" :src="item.src" mode=""></image>
+				<image v-if="item.src" :src="item.src" mode="" class="bg-light img"></image>
 				<text v-if="item.rightIcon" :class="item.rightIcon" style="font-size: 32rpx;"></text>
 				<switch v-if="item.checked || item.checked === false" :checked="item.checked" />
 				<input v-if="item.input" type="text" :placeholder="item.input" v-model="value[item.model]"
@@ -23,11 +23,11 @@
 		props: {
 			list: {
 				type: Array,
-				default: () => ([])
+				default: () => []
 			},
 			value: {
 				type: Object,
-				defauIt: () => ({})
+				defauIt: () => {}
 			}
 		},
 		data() {
@@ -79,5 +79,9 @@
 	.icon-set:before {
 		font-size: 40rpx;
 		color: #1d78dc;
+	}
+	.img{
+		width: 40px;
+		height: 40px;
 	}
 </style>

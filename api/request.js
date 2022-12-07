@@ -13,7 +13,7 @@ const request = (options) => {
 			method: options.method || 'GET',
 			header: {
 				appid: "bd9d01ecc75dbbaaefce",
-				token: store.state.userToken || ""
+				token: store.state.userInfo.token || ""
 			},
 			data: options.data || {},
 			success: (res) => {

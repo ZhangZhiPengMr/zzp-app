@@ -3,44 +3,32 @@ import Vuex from "vuex"
 Vue.use(Vuex)
 
 import {
-	TOKEN_KEY,
 	USER_NAME_KEY
 } from "@/enum/user.js"
 
 const store = new Vuex.Store({
 	state: {
-		// 用户登录之后token
-		userToken: uni.getStorageSync(TOKEN_KEY) || "",
 		// 用户信息
 		userInfo: uni.getStorageSync(USER_NAME_KEY) || ""
 	},
 	getters: {
 		// 登录的状态
 		loginState(state) {
-			return !!state.userToken
+			return !!state.userInfo.token
 		}
 	},
 	mutations: {
-		//登录成功存储token
+		//登录成功存储用户信息
 		setToken(state, data) {
-			if (data.token) {
-				uni.setStorageSync(TOKEN_KEY, data.token)
-			}
 			if (data) {
-				let obj = {
-					username: data.username,
-					phone: data.phone
-				}
-				uni.setStorageSync(USER_NAME_KEY, obj)
+				uni.setStorageSync(USER_NAME_KEY, data)
 			}
 		},
 		// 退出登录
 		logout(state) {
-			// 清空用户信息&用户token和本地
+			// 清空用户信息
 			state.userInfo = ""
-			state.userToken = ""
 			uni.removeStorageSync(USER_NAME_KEY)
-			uni.removeStorageSync(TOKEN_KEY)
 		}
 	},
 	actions: {
