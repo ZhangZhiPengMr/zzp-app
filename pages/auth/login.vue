@@ -62,7 +62,7 @@
 		methods: {
 			// 返回上一步
 			back() {
-				this.navTab("/pages/my/my")
+				this.navBack()
 			},
 			// 同意登录
 			hanbleCange() {
@@ -107,7 +107,6 @@
 			async loginSuccess() {
 				try {
 					const response = await userApi.login(this.loginInfo)
-					uni.hideLoading()
 					if (response instanceof Object) {
 						this.$util.msg("登录成功")
 						this.$store.commit('setToken', response)
@@ -115,22 +114,24 @@
 						let userInfo = this.$store.state.userInfo
 						if (userInfo.phone) {
 							this.navTo("/pages/bind-phone/bind-phone")
+							return
 						} else {
-							this.back()
+							this.navTab("/pages/my/my")
+							location.reload()
 						}
+
 					} else {
 						this.$util.msg(response)
 					}
 				} catch (e) {
 					console.log(e);
-					uni.hideLoading()
 				}
 			},
 			//注册成功是调用
 			async registerSuccess() {
 				try {
 					const response = await userApi.register(this.loginInfo)
-					uni.hideLoading()
+
 					if (response.username) {
 						this.$util.msg("注册成功")
 						this.register()
@@ -143,7 +144,6 @@
 					}
 				} catch (e) {
 					console.log(e);
-					uni.hideLoading()
 				}
 			},
 			// 忘记密码

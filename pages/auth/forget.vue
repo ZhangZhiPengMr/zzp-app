@@ -50,7 +50,7 @@
 		methods: {
 			// 返回上一步
 			back() {
-				this.navTo("/pages/auth/login")
+				this.navBack()
 			},
 			//立即找回
 			async clickButton() {

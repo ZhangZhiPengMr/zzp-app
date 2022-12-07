@@ -1,5 +1,5 @@
 <template>
-	<view class="page">
+	<view class=" page animate__animated animate__fadeInDown animate__faster">
 		<!-- 头部导航 -->
 		<view class="my-top">
 			<text>我的</text>
@@ -7,7 +7,7 @@
 		</view>
 		<view class="dl-bg">
 			<!-- 个人资料组件 -->
-			<myPersonal :userInfo="userInfo"></myPersonal>
+			<myPersonal></myPersonal>
 			<view class="my-list p-3">
 				<!-- 我的列表组件 -->
 				<myList :lists="lists"></myList>
@@ -22,21 +22,15 @@
 
 <script>
 	import myPersonal from "./components/personal.vue"
-	import myList from "./components/my-list.vue"
+	import myList from "@/components/my-list/my-list.vue"
 	import lists from "@/config/my-list.js"
 	import list from "@/config/i-list.js"
-	import {
-		mapState
-	} from "vuex"
 	export default {
 		data() {
 			return {
 				lists: lists(),
 				list: list()
 			}
-		},
-		computed: {
-			...mapState(["userInfo"])
 		},
 		components: {
 			myPersonal,
@@ -48,7 +42,8 @@
 				this.navTo("/pages/my/my-setup")
 			}
 		},
-		onLoad() {}
+		onLoad() {
+		}
 	}
 </script>
 

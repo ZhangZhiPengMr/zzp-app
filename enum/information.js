@@ -3,6 +3,7 @@ export default () => {
 		video: "视频",
 		media: "图文",
 		audio: "音频",
-		column: "专栏"
+		column: "专栏",
+		course: "课程"
 	}
 }

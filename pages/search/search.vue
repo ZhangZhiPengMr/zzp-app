@@ -33,8 +33,7 @@
 		border-radius: 100rpx;
 		height: 60rpx;
 		background-color: rgb(246, 249, 251);
-		color: #ccc;
-		font-size: 32rpx;
+		font-size: 28rpx;
 	}
 
 	.icon-search:before {

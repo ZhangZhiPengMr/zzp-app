@@ -49,7 +49,8 @@
 			async clickButton() {
 				try {
 					const response = await userApi.bindPhone(this.bindPhone)
-					console.log(response);
+					this.navTab("/pages/my/my")
+					location.reload()
 				} catch (e) {
 					//TODO handle the exception
 					console.log(e);

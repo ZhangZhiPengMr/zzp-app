@@ -21,8 +21,18 @@ const group = (page = 1, usable = 1) => {
 	})
 }
 
+// 领取优惠卷接口
+const receive = (data) => {
+	return request({
+		url: "/mobile/user_coupon/receive",
+		method: "post",
+		data
+	})
+}
+
 export default {
 	index,
 	coupon,
-	group
+	group,
+	receive
 }
