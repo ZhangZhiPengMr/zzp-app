@@ -95,9 +95,11 @@
 					//调取登录的接口
 					if (this.state) {
 						this.loginSuccess()
+						uni.hideLoading()
 					} else {
 						// 调取注册成功接口
 						this.registerSuccess()
+						uni.hideLoading()
 					}
 				} else {
 					this.$util.msg("请先阅读并同意用户协议&隐私声明")
@@ -123,7 +125,9 @@
 					} else {
 						this.$util.msg(response)
 					}
+					uni.hideLoading()
 				} catch (e) {
+					uni.hideLoading()
 					console.log(e);
 				}
 			},
@@ -142,7 +146,9 @@
 					} else {
 						this.$util.msg(response)
 					}
+					uni.hideLoading()
 				} catch (e) {
+					uni.hideLoading()
 					console.log(e);
 				}
 			},

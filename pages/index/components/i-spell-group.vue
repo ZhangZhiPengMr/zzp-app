@@ -5,22 +5,8 @@
 		</view>
 		<scroll-view scroll-x="true">
 			<view class="scroll-row flex p-2">
-				<view v-for="(item,index) in spellGroupData" :key="index" class="mr-2" style="width: 340rpx;">
-					<view class="position-relative">
-						<image :src="item.cover" mode="" style="width: 340rpx;height: 180rpx;"></image>
-						<view class="information">
-							<text class="text-white font-sm ">{{information[item.type]}}</text>
-						</view>
-					</view>
-
-					<view class="flex flex-column flex-shrink">
-						<text class="text-ellipsis font-md">{{item.title}}</text>
-						<view>
-							<text v-if="item.price == '0.00'" class="font-md text-danger">免费</text>
-							<text v-else class="font-md text-danger">￥{{item.price}}</text>
-							<text class="font-sm text-light-muted">￥{{item.t_price}}</text>
-						</view>
-					</view>
+				<view v-for="(item,index) in spellGroupData" :key="index" style="width: 340rpx;">
+					<i-item :item="item"></i-item>
 				</view>
 			</view>
 		</scroll-view>

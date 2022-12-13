@@ -99,8 +99,10 @@
 						})
 						this.$util.msg(response)
 						this.getCoupon()
+						uni.hideLoading()
 					} catch (e) {
 						console.log(e);
+						uni.hideLoading()
 						//TODO handle the exception
 					}
 				}

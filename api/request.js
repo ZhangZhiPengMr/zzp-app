@@ -18,12 +18,10 @@ const request = (options) => {
 			data: options.data || {},
 			success: (res) => {
 				resolve(res.data.data)
-				uni.hideLoading()
 			},
 			fail: (error) => {
 				reject(error)
 				console.log(error);
-				uni.hideLoading()
 			}
 		})
 	})

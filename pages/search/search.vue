@@ -1,44 +1,72 @@
 <template>
 	<view>
-		<view class="flex align-center justify-between">
-			<text class="iconfont icon-fanhui m-1" style="font-size: 27px;" @click="navBack()"></text>
-			<input type="text" class="iconfont icon-search search flex-1 flex align-center justify-center"
-				placeholder="请输入搜索关键词" v-model="searchVal" @confirm="hanbleSearch">
-			<text style="font-size: 30rpx;" @click="hanbleSearch">搜索</text>
+		<uni-search-bar @hanbleSearch="hanbleSearch" @handleBack="handleBack"></uni-search-bar>
+		<!-- 历史记录组件 -->
+		<view v-if="history">
+			<history :history="history" @handleItem="handleItem" @handleDelete="handleDelete"></history>
 		</view>
 	</view>
 </template>
 
 <script>
+	import history from "./components/history.vue"
 	export default {
 		data() {
 			return {
-				searchVal:"",   //搜索的内容
+				history: ""
 			};
 		},
-		methods:{
+		methods: {
 			//搜索事件
-			hanbleSearch(){
-				if(!this.searchVal){
-					this.$util.msg("请输入关键词")
-					return
+			hanbleSearch(val) {
+				//进行本地存储
+				const history = uni.getStorageSync("history") || []
+				//判断搜索与历史记录有没有重复的
+				const index = history.findIndex(item => item === val)
+				if (index > -1) {
+					history.splice(index, 1)
+					history.unshift(val)
+				} else {
+					history.unshift(val)
 				}
+				uni.setStorageSync("history", history)
+				this.navTo(`/pages/search-result/search-result?keyword=${val}`)
+			},
+			// 搜索框回填事件
+			handleItem(item) {
+				this.hanbleSearch(item)
+			},
+			// 清楚全部
+			handleDelete() {
+				// 提示
+				uni.showModal({
+					content: '是否要清除搜索记录？',
+					success: async (res) => {
+						if (res.confirm) {
+							uni.removeStorageSync("history")
+							this.getHistory()
+						}
+					},
+				});
+			},
+			// 返回首页
+			handleBack() {
+				this.navTab(`/pages/index/index`)
+			},
+			// 获取本地的历史记录
+			getHistory() {
+				this.history = uni.getStorageSync("history")
 			}
-		}
+		},
+		onLoad() {
+			this.getHistory()
+		},
+		components: {
+			history
+		},
 	}
 </script>
 
 <style lang="scss">
-	.search {
-		border-radius: 100rpx;
-		height: 60rpx;
-		background-color: rgb(246, 249, 251);
-		font-size: 28rpx;
-	}
 
-	.icon-search:before {
-		color: #bbb;
-		font-size: 36rpx;
-		margin: 0 20rpx;
-	}
 </style>

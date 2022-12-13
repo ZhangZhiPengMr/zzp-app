@@ -30,6 +30,7 @@ const receive = (data) => {
 	})
 }
 
+
 export default {
 	index,
 	coupon,
