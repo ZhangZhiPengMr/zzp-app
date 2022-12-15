@@ -1,7 +1,7 @@
 <template>
 	<view>
 		<swiper :indicator-dots="true" :autoplay="true" :interval="3000" :duration="1000" class="swiper">
-			<swiper-item v-for="(item,index) in bannerData" :key="index" class="swiper-item">
+			<swiper-item v-for="(item,index) in bannerData" :key="index" class="swiper-item" @click="handleToWebView(item)">
 				<image :src="item.src" mode=""></image>
 			</swiper-item>
 		</swiper>
@@ -14,6 +14,17 @@
 			bannerData: {
 				type: Array,
 				default: () => []
+			}
+		},
+		methods: {
+			handleToWebView(item) {
+				if (item.url && item.type === 'webview') {
+					this.navTo("/pages/webview/webview?url=" + item.url)
+					return
+				}
+
+				this.navTo("/pages/course/course?id=" + item.course_id)
+
 			}
 		}
 	}

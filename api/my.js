@@ -9,6 +9,16 @@ const userCoupon = (data) => {
 	})
 }
 
+// 我的订单接口
+const order = (data) => {
+	return request({
+		url: "/mobile/order/list",
+		method: "get",
+		data
+	})
+}
+
 export default {
-	userCoupon
+	userCoupon,
+	order
 }

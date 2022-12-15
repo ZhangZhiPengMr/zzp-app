@@ -1,10 +1,13 @@
 <template>
 	<view>
-		<view class="img">
+		<view class="img" v-if="courseInfo.price !== '0.00'">
 			<image :src="courseInfo.cover" mode=""></image>
 			<view class="information">
 				<text class="text-white font-sm">{{information[courseInfo.type]}}</text>
 			</view>
+		</view>
+		<view class="flex justify-between bg-danger text-white px-3 py-2" v-if="courseInfo.flashsale">
+			
 		</view>
 		<view class="animate__animated animate__fadeIn animate__faster">
 			<view class="flex flex-column p-3">
@@ -13,21 +16,31 @@
 				</view>
 				<view class="flex align-center justify-between">
 					<text class="font-sm text-light-muted">{{courseInfo.sub_count}}人学过</text>
-					<text v-if="!courseInfo.isfava" class="iconfont icon-shoucang1" style="font-size: 50rpx;" @click="handleCollect"></text>
-					<text v-else class="iconfont icon-shoucang1 text-main" style="font-size: 50rpx;" @click="handleUnCollect"></text>
+					<text v-if="!courseInfo.isfava" class="iconfont icon-shoucang1" style="font-size: 50rpx;"
+						@click="handleCollect"></text>
+					<text v-else class="iconfont icon-shoucang1 text-main" style="font-size: 50rpx;"
+						@click="handleUnCollect"></text>
 				</view>
-				<view class="flex mt-2 align-end">
+				<view class="flex mt-2 align-end" v-if="courseInfo.price !== '0.00'">
 					<text class="text-danger font-lg">￥{{courseInfo.price}}</text>
 					<text class="font-sm text-light-muted ml-1 text-through">￥{{courseInfo.t_price}}</text>
 				</view>
 			</view>
+
 			<view class="border-top-14">
 				<view class="font-md py-2 px-3">
-					课程简介
+					{{courseInfo.price == '0.00'?'课程内容':'课程简介'}}
 				</view>
 				<view class="py-2 px-3">
-					<rich-text :nodes="courseInfo.try"></rich-text>
+					<rich-text :nodes="courseInfo.try" v-if="courseInfo.price !== '0.00'"></rich-text>
+					<rich-text :nodes="courseInfo.content" v-if="courseInfo.price == '0.00'"></rich-text>	
 				</view>
+			</view>
+		</view>
+		<view style="height: 75px;" v-if="courseInfo.price !== '0.00'"></view>
+		<view class="fixed-bottom p-2 border-top bg-white" v-if="courseInfo.price !== '0.00'">
+			<view class="bg-main main-btn" @click="handleOrder">
+				立即订购￥{{courseInfo.price}}
 			</view>
 		</view>
 	</view>
@@ -80,7 +93,7 @@
 					})
 					this.$util.msg("收藏成功")
 					this.getCourse()
-					uni.hideLoading() 	
+					uni.hideLoading()
 				} catch (e) {
 					console.log(e);
 					uni.hideLoading()
@@ -88,7 +101,7 @@
 				}
 			},
 			// 取消收藏
-			async handleUnCollect(){				
+			async handleUnCollect() {
 				try {
 					// 消息加载
 					uni.showLoading({
@@ -107,11 +120,18 @@
 					uni.hideLoading()
 					//TODO handle the exception
 				}
+			},
+			// 创建订单
+			handleOrder() {
+				this.navTo(`/pages/create-order/create-order?id=${this.course.id}&type=course`)
 			}
 		},
 		onLoad(options) {
 			this.course.id = options.id
 			this.getCourse()
+			uni.setNavigationBarTitle({
+				title: this.courseInfo.title
+			})
 		}
 	}
 </script>

@@ -27,8 +27,28 @@ const unCollect = (data) => {
 	})
 }
 
+// 创建订单信息接口
+const order = (data) => {
+	return request({
+		url: "/mobile/goods/read",
+		method: "get",
+		data
+	})
+}
+
+// 创建订单信息接口
+const count = (data) => {
+	return request({
+		url: "/mobile/user_coupon/count",
+		method: "get",
+		data
+	})
+}
+
 export default {
 	course,
 	collect,
-	unCollect
+	unCollect,
+	order,
+	count
 }

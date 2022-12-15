@@ -11,7 +11,7 @@
 			<view class="flex flex-1 align-end">
 				<text v-if="item.price == '0.00'" class="font-md text-danger">免费</text>
 				<text v-else class="font-md text-danger">￥{{item.price}}</text>
-				<text class="font-sm text-light-muted">￥{{item.t_price}}</text>
+				<text v-if="item.t_price" class="font-sm text-light-muted">￥{{item.t_price}}</text>
 			</view>
 		</view>
 	</view>
@@ -38,8 +38,8 @@
 		methods: {
 			// 跳转详情页面
 			tiaozhuan(item) {
+				console.log(item);
 				if (item.type === "column") {
-					console.log(1);
 					this.navTo("/pages/column/column?id=" + item.id)
 				} else {
 					this.navTo("/pages/course/course?id=" + item.id)
